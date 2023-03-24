@@ -1,10 +1,16 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"fmt"
 	"net/http"
-	"user-microservice/models"
 	"user-microservice/common"
+	//"user-microservice/databases"
+	"user-microservice/models"
+
+	"github.com/gin-gonic/gin"
+
+	"gorm.io/driver/postgres"
+    "gorm.io/gorm"
 )
 
 type Main struct {
@@ -20,12 +26,18 @@ func (m *Main) initServer() error {
 		return err
 	}
 
-	// // Initialize User database
-	// err = databases.Database.Init()
-	// if err != nil {
-	// 	return err
-	// }
+	fmt.Printf("5")
+	// Initialize User database
+	postgresDB, err := gorm.Open(postgres.Open(common.Config.UserPostgresURL), &gorm.Config{})
+	fmt.Printf("2")
+	if err != nil {
+		return err
+	}
+	fmt.Printf("3")
+	postgresDB.AutoMigrate(&models.User{})
 
+	postgresDB.Create(models.User{Name: "Bob", HashedPassword: "password123"})
+	
 	m.router = gin.Default()
 
 	return nil
@@ -33,9 +45,14 @@ func (m *Main) initServer() error {
 
 
 func main() {
-	r := gin.Default()
+	
+	m := Main{}
 
-	r.GET("/", func(c *gin.Context) {
+    if m.initServer() != nil {
+		return
+	}
+
+	m.router.GET("/", func(c *gin.Context) {
 		
 		user := models.User{Name: "kamil", HashedPassword: "password123"}
 
@@ -43,5 +60,5 @@ func main() {
 	  
 	})
 
-	r.Run(":9090")
+	m.router.Run(common.Config.Port)
 }

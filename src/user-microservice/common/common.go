@@ -10,7 +10,7 @@ import (
 type Configuration struct {
 	Port				string `json:"port"`
 
-	UserPostgresURL		string `json:"consumerPostgresURL"`
+	UserPostgresURL		string `json:"userPostgresURL"`
 
 	JwtSecretPassword	string `json:"jwtSecretPassword"`
 	Issuer				string `json:"issuer"`
