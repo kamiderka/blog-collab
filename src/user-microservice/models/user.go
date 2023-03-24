@@ -5,6 +5,6 @@ package models
 type User struct {
 	// gorm.Model
 
-	Name 			string `json: name`
-	HashedPassword  string `json: password`
+	Name 			string `json:"name"`
+	HashedPassword  string `json:"password"`
 }
