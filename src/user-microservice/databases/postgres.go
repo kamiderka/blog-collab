@@ -2,38 +2,25 @@ package databases
 
 import (
 	"gorm.io/driver/postgres"
-    "gorm.io/gorm"
+	"gorm.io/gorm"
 
-	"fmt"
-
+	"user-microservice/common"
+	"user-microservice/models"
 )
 
 type PostgresDB struct {
-	PostgresDB 		*gorm.DB
-	Model			interface{}
-	ConnectionURL 	string 
+	DB *gorm.DB
 }
 
 func (db *PostgresDB) Init() error {
 	var err error
 
-	fmt.Printf("1")
-	db.PostgresDB, err = gorm.Open(postgres.Open(db.ConnectionURL), &gorm.Config{})
-	fmt.Printf("2")
+	db.DB, err = gorm.Open(postgres.Open(common.Config.UserPostgresURL), &gorm.Config{})
+
 	if err != nil {
-		return err
+		panic(err.Error())
 	}
-	fmt.Printf("3")
-	return db.PostgresDB.AutoMigrate(db.Model)
+
+	return db.DB.AutoMigrate(&models.User{})
 
 }
-
-
-func NewPostgresDB(model interface{}, connectionURL string) *PostgresDB {
-	fmt.Printf("4")
-	return &PostgresDB{
-		Model:          model,
-		ConnectionURL:  connectionURL,
-	}
-}
- 
