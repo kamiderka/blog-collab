@@ -4,9 +4,10 @@ import (
 	"net/http"
 	"user-microservice/common"
 	db "user-microservice/databases"
-	"user-microservice/models"
+	// "user-microservice/models"
 
 	"github.com/gin-gonic/gin"
+	"user-microservice/daos"
 )
 
 type Main struct {
@@ -44,10 +45,18 @@ func main() {
 
 	m.router.GET("/", func(c *gin.Context) {
 
-		user := &models.User{Name: "Mark", HashedPassword: "password123"}
+		// user := &models.User{Name: "Mark", HashedPassword: "password123"}
 
-		db.UserDb.DB.Create(user)
+		//db.UserDb.DB.Create(user)
+
+		var userDAO daos.User
 		
+		user, err := userDAO.GetByID(26) 
+		
+		if err != nil{
+			return 
+		}
+
 		c.JSON(http.StatusOK, user)
 
 	})
