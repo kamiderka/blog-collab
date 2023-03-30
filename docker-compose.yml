@@ -15,10 +15,8 @@ services:
     command: --cleanup
     restart: always
 
-  frontend:
-    build: ./frontend
-    container_name: frontend_c
+  dockerized-react:
+    image: dockerized-react
     ports:
       - "3000:3000"
-    stdin_open: true
-    tty: true
+    restart: always
