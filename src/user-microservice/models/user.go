@@ -6,10 +6,11 @@ type User struct {
 	gorm.Model
 	Name		string `json:"name"`
 	Password 	string `gorm:"unique" json:"password"`
+	Role		string `json:"role" gorm:"default:'user'"`
 	
 }
 
-type AddUser struct {
+type AddUserDTO struct {
 	Name     string `json:"name"`
 	Password string `json:"password"`
 }

@@ -7,7 +7,9 @@ import (
 	"user-microservice/models"
 
 	"github.com/gin-gonic/gin"
-	"user-microservice/daos"
+	// "user-microservice/daos"
+	"user-microservice/utils"
+
 )
 
 type Main struct {
@@ -49,15 +51,16 @@ func main() {
 
 		db.UserDb.DB.Create(user)
 
-		var userDAO daos.User
+		// var userDAO daos.User
+		var utils utils.Utils
 		
-		user_dao, err := userDAO.Login("Mark", "password123") 
+		jwt, err := utils.GenerateJWT(user.Name, user.Role)
 		
 		if err != nil{
 			return 
 		}
 
-		c.JSON(http.StatusOK, user_dao)
+		c.JSON(http.StatusOK, jwt)
 
 	})
 
