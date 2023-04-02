@@ -1,6 +1,6 @@
 import { useAuth } from "../../store/auth-context";
 import useInput from "../../hooks/use-input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginValidation, passwordValidation } from "./loginValidation";
 
 const SignInForm = () => {
@@ -28,6 +28,8 @@ const SignInForm = () => {
     reset: resetPasswordInput,
   } = useInput(passwordValidation);
 
+  const navigate = useNavigate();
+
   const { loginForm, onChangeForm } = useAuth();
 
   let formIsValid = false;
@@ -45,15 +47,16 @@ const SignInForm = () => {
     if (!formIsValid) return;
 
     console.log("zalogowano");
+    navigate("/admin-panel");
     resetLoginInput("");
     resetPasswordInput("");
   };
 
   const inputStyles =
-    "w-[100%] mt-[20px] text-[15px] font-semibold text-gray_500 border-b-2 focus:outline-none placeholder-gray_700 ";
+    "w-[100%] mt-[20px] text-[16px] font-semibold text-gray_500 border-b-2 focus:outline-none placeholder-gray_700 ";
 
   const buttonStyles =
-    "h-[40px] w-[100%] mt-[30px] mb-[30px] text-[15px] font-semibold text-white rounded-[10px] ";
+    "h-[40px] w-[100%] mt-[30px] mb-[30px] text-[16px] font-semibold text-white rounded-[10px] ";
 
   const errorStyles = "text-[15px] mt-[10px] font-medium text-red";
 
@@ -62,10 +65,10 @@ const SignInForm = () => {
       onSubmit={submitFormHandler}
       className="custom-width h-auto absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] px-[20px] custom-box-shadow rounded-lg"
     >
-      <h1 className="mt-[30px] text-[25px] font-bold text-gray_500">
+      <h1 className="mt-[30px] text-[24px] font-bold text-gray_500">
         Hi, Welcome Back
       </h1>
-      <p className="mt-[10px] text-[15px] font-normal text-gray_700">
+      <p className="mt-[10px] text-[16px] font-normal text-gray_700">
         It's good to see you again! Hope you didn't miss any interesting
         articles.
       </p>
