@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useInput from "../../hooks/use-input";
 import {
   loginValidation,
@@ -43,6 +43,8 @@ const SignUpForm = () => {
     reset: resetpasswordInput,
   } = useInput(passwordValidation);
 
+  const navigate = useNavigate();
+
   let formIsValid = false;
 
   if (enteredEmailIsValid && enteredLoginIsValid && enteredPasswordIsValid) {
@@ -54,15 +56,16 @@ const SignUpForm = () => {
     if (!formIsValid) return;
 
     console.log("zalogowano");
+    navigate("/admin-panel");
     resetLoginInput("");
     resetpasswordInput("");
   };
 
   const inputStyles =
-    "w-[100%] mt-[20px] text-[15px] font-semibold text-gray_500 border-b-2 focus:outline-none placeholder-gray_700 ";
+    "w-[100%] mt-[20px] text-[16px] font-semibold text-gray_500 border-b-2 focus:outline-none placeholder-gray_700 ";
 
   const buttonStyles =
-    "h-[40px] w-[100%] mt-[30px] mb-[30px] text-[15px] font-semibold text-white rounded-[10px] ";
+    "h-[40px] w-[100%] mt-[30px] mb-[30px] text-[16px] font-semibold text-white rounded-[10px] ";
 
   return (
     <form

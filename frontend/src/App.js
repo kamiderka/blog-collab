@@ -5,6 +5,7 @@ import ErrorPage from "./pages/ErrorPage";
 import RootLayout from "./pages/RootLayout";
 import SignInForm from "./components/LoginAuth/SignInForm";
 import SignUpForm from "./components/LoginAuth/SignUpForm";
+import AdminPanel from "./pages/AdminPanel";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,6 +21,7 @@ function App() {
         },
         { path: "/login/signin", element: <SignInForm /> },
         { path: "/login/signup", element: <SignUpForm /> },
+        { path: "/admin-panel", element: <AdminPanel /> },
       ],
     },
   ]);

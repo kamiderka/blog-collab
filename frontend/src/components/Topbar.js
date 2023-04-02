@@ -6,8 +6,6 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 
 const Topbar = () => {
-  const { page, onChangeForm } = useAuth();
-
   const { pathname } = useLocation();
 
   const iconStyle = {
@@ -16,8 +14,8 @@ const Topbar = () => {
   };
 
   return (
-    <header className="h-[70px] p-[20px] flex items-center justify-between">
-      <h1 className="text-[25px] font-bold text-gray_300 cursor-pointer">
+    <header className="h-[10vh] p-[20px] flex items-center justify-between shadow-md">
+      <h1 className="text-[24px] font-bold text-gray_300 cursor-pointer">
         Crypto <span className="text-blue">Blog</span>
       </h1>
       <Link
