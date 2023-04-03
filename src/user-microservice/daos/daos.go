@@ -34,7 +34,7 @@ func (u *User) DeleteByID(id int) error {
 func (u *User) Login(name string, password string) (models.User, error){
 
 	var user models.User
-    err := db.UserDb.DB.Where("name = ? AND password >= ?", name, password).First(&user).Error
+    err := db.UserDb.DB.Where("name = ? AND password = ?", name, password).First(&user).Error
     if err != nil {
         return models.User{}, err
     }

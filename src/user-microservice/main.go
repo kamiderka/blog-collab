@@ -1,14 +1,15 @@
 package main
 
 import (
-	"net/http"
+	// "net/http"
 	"user-microservice/common"
 	db "user-microservice/databases"
-	"user-microservice/models"
+	// "user-microservice/models"
 
 	"github.com/gin-gonic/gin"
 	// "user-microservice/daos"
-	"user-microservice/utils"
+	// "user-microservice/utils"
+	"user-microservice/controllers"
 
 )
 
@@ -45,24 +46,19 @@ func main() {
 		return
 	}
 
-	m.router.GET("/", func(c *gin.Context) {
+	c := controllers.User{}
+	v1 := m.router.Group("/api/v1") 
+	{
 
-		user := &models.User{Name: "Mark", Password: "password123"}
-
-		db.UserDb.DB.Create(user)
-
-		// var userDAO daos.User
-		var utils utils.Utils
-		
-		jwt, err := utils.GenerateJWT(user.Name, user.Role)
-		
-		if err != nil{
-			return 
+		admin := v1.Group("/admin")
+		{
+			admin.POST("/auth", c.Authenticate)
 		}
 
-		c.JSON(http.StatusOK, jwt)
+		// user := v1.Group("/users")
 
-	})
+
+	}
 
 	m.router.Run(common.Config.Port)
 }

@@ -27,6 +27,11 @@ const (
 	ErrPasswordEmpty  = "Password is empty"
 )
 
+// Status Code
+const (
+	StatusCodeUnknown = -1
+)
+
 
 // LoadConfig loads configuration from the config file
 func LoadConfig() error {
