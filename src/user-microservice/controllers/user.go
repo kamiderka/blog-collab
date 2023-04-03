@@ -29,13 +29,13 @@ func (u *User) Authenticate(ctx *gin.Context) {
 	username := req.Name
 	password := req.Password
 	
-		var err error
-	_, err = u.userDAO.Login(username, password)
+	var err error
+	user , err := u.userDAO.Login(username, password)
 
 	if err == nil {
 		var tokenString string
 
-		tokenString, err = u.utils.GenerateJWT(username, "user")
+		tokenString, err = u.utils.GenerateJWT(username, user.Role)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, models.Error{common.StatusCodeUnknown, err.Error()})
 			return
