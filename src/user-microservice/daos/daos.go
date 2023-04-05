@@ -43,8 +43,6 @@ func (u *User) Login(name string, password string) (models.User, error){
 
 func (u *User) Insert(user models.User) error {
     
-
-	
 	result := db.UserDb.DB.Create(&user)
     if result.Error != nil {
         return result.Error

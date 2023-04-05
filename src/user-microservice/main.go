@@ -7,6 +7,7 @@ import (
 	// "user-microservice/models"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/contrib/jwt"
 	// "user-microservice/daos"
 	// "user-microservice/utils"
 	"user-microservice/controllers"
@@ -53,10 +54,26 @@ func main() {
 		admin := v1.Group("/admin")
 		{
 			admin.POST("/auth", c.Authenticate)
+
+			// user.GET("/list", c.ListUsers)
+			// user.GET("detail/:id", c.GetUserByID)
+			// user.GET("/", c.GetUserByParams)
+			// user.DELETE(":id", c.DeleteUserByID)
+
 		}
 
-		// user := v1.Group("/users")
 
+		// PAMIĘTAJ O APLIKACJI, MORDO! 
+
+		user := v1.Group("/users")
+
+
+		user.Use(jwt.Auth(common.Config.JwtSecretPassword))
+		{
+
+			user.POST("/register", c.AddUser)
+
+		} 
 
 	}
 
