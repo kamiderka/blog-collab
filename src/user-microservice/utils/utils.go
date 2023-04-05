@@ -1,10 +1,13 @@
 package utils
 
 import (
-    jwt_lib "github.com/dgrijalva/jwt-go"
-    "golang.org/x/crypto/bcrypt"
-    "time"
-    "user-microservice/common"
+	"errors"
+	"strconv"
+	"time"
+	"user-microservice/common"
+
+	jwt_lib "github.com/dgrijalva/jwt-go"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type Utils struct {
@@ -41,4 +44,18 @@ func (u *Utils) HashPassword(password string) (string, error) {
 func (u *Utils) CheckPasswordHash(password, hash string) bool {
     err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
     return err == nil
+}
+
+func (u *Utils) StrToUint(str string) (uint, error) {
+	
+	i, err := strconv.Atoi(str)
+	if err != nil {
+		return 0, err
+	}
+
+	if i < 0 {
+		return 0, errors.New("ID should be greater than 0.")
+	}
+
+	return uint(i), nil 
 }

@@ -51,12 +51,12 @@ func main() {
 	v1 := m.router.Group("/api/v1") 
 	{
 
-		admin := v1.Group("/admin")
+		user := v1.Group("/user")
 		{
-			admin.POST("/auth", c.Authenticate)
+			user.POST("/auth", c.Authenticate)
+			user.POST("/register", c.AddUser)
 
-			// user.GET("/list", c.ListUsers)
-			// user.GET("detail/:id", c.GetUserByID)
+			user.GET("detail/:id", c.GetUserByID)
 			// user.GET("/", c.GetUserByParams)
 			// user.DELETE(":id", c.DeleteUserByID)
 
@@ -65,13 +65,9 @@ func main() {
 
 		// PAMIĘTAJ O APLIKACJI, MORDO! 
 
-		user := v1.Group("/users")
-
-
 		user.Use(jwt.Auth(common.Config.JwtSecretPassword))
 		{
 
-			user.POST("/register", c.AddUser)
 
 		} 
 

@@ -64,3 +64,22 @@ func (u *User) AddUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, models.Error{common.StatusCodeUnknown, err.Error()})
 	}
 }
+
+func (u *User) GetUserByID(ctx *gin.Context) {
+	var user models.User
+	var err error
+
+	uid, err := u.utils.StrToUint( ctx.Params.ByName("id") ) 
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, models.Error{common.StatusCodeUnknown, err.Error()})
+		return 
+    }
+
+	user, err = u.userDAO.GetByID(uid)
+	
+	if err == nil {
+		ctx.JSON(http.StatusOK, user)
+	} else {
+		ctx.JSON(http.StatusInternalServerError, models.Error{common.StatusCodeUnknown, err.Error()})
+	}
+}

@@ -20,6 +20,6 @@ type LoginUserDTO struct {
 	Password string `json:"password"`
 }
 
-type RequestUserByIdDTO struct {
+type ReturnUserDTO struct {
 	
 }
