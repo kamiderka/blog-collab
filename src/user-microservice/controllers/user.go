@@ -69,13 +69,13 @@ func (u *User) GetUserByID(ctx *gin.Context) {
 	var user models.User
 	var err error
 
-	uid, err := u.utils.StrToUint( ctx.Params.ByName("id") ) 
+	id, err := u.utils.StrToUint( ctx.Params.ByName("id") ) 
     if err != nil {
         ctx.JSON(http.StatusInternalServerError, models.Error{common.StatusCodeUnknown, err.Error()})
 		return 
     }
 
-	user, err = u.userDAO.GetByID(uid)
+	user, err = u.userDAO.GetByID(id)
 	
 	if err == nil {
 		ctx.JSON(http.StatusOK, user)
