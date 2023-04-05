@@ -4,8 +4,8 @@ import "gorm.io/gorm"
 
 type User struct {
 	gorm.Model
-	Name		string `json:"name"`
-	Password 	string `gorm:"unique" json:"password"`
+	Name		string `gorm:"unique" json:"name"` 
+	Password 	string `json:"password"`
 	Role		string `json:"role" gorm:"default:'user'"`
 	
 }
@@ -13,4 +13,13 @@ type User struct {
 type AddUserDTO struct {
 	Name     string `json:"name"`
 	Password string `json:"password"`
+}
+
+type LoginUserDTO struct {
+	Name     string `json:"name"`
+	Password string `json:"password"`
+}
+
+type RequestUserByIdDTO struct {
+	
 }
