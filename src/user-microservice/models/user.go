@@ -21,5 +21,8 @@ type LoginUserDTO struct {
 }
 
 type ReturnUserDTO struct {
-	
+	gorm.Model
+	Name		string `gorm:"unique" json:"name"` 
+	Role		string `json:"role" gorm:"default:'user'"`
+
 }
