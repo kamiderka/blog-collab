@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,800&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.custom-box-shadow {
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1), -4px -4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-width {
+  width: calc(100% - 40px);
+}
+
+.custom-box-shadow {
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1), -4px -4px 4px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,8 @@
+{
+    "port" : ":9090",
+    "userPostgresURL" : "postgres://YourUserName:YourPassword@YourHostname:5432/YourDatabaseName", 
+
+    "jwtSecretPassword": "mySecretPassword",
+    "issuer" : "blog-collab"
+
+}

@@ -1,6 +1,5 @@
-version: '3'
+version: "3"
 services:
-
   user-microservice:
     image: user-microservice
     environment:
@@ -8,10 +7,16 @@ services:
     ports:
       - "9090:9090"
     restart: always
-    
+
   watchtower:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --cleanup
+    restart: always
+
+  dockerized-react:
+    image: dockerized-react
+    ports:
+      - "3000:3000"
     restart: always
