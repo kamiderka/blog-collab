@@ -22,7 +22,7 @@ func (u *User) GetByID(id uint) (models.User, error){
 
 }
 
-func (u *User) DeleteByID(id int) error {
+func (u *User) DeleteByID(id uint) error {
     
 	result := db.UserDb.DB.Delete(&models.User{}, id)
     if result.Error != nil {

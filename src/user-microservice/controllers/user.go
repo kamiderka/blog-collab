@@ -43,7 +43,6 @@ func (u *User) Authenticate(ctx *gin.Context) {
 	} else {
 		ctx.JSON(http.StatusUnauthorized, err.Error())
 	}
-	
 }
 
 func (u *User) AddUser(ctx *gin.Context) {
@@ -76,6 +75,25 @@ func (u *User) GetUserByID(ctx *gin.Context) {
     }
 
 	user, err = u.userDAO.GetByID(id)
+	
+	if err == nil {
+		ctx.JSON(http.StatusOK, user)
+	} else {
+		ctx.JSON(http.StatusInternalServerError, models.Error{common.StatusCodeUnknown, err.Error()})
+	}
+}
+
+func (u *User) DeleteUserByID(ctx *gin.Context) {
+	var user models.User
+	var err error
+
+	id, err := u.utils.StrToUint( ctx.Params.ByName("id") ) 
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, models.Error{common.StatusCodeUnknown, err.Error()})
+		return 
+    }
+
+	err = u.userDAO.DeleteByID(id)
 	
 	if err == nil {
 		ctx.JSON(http.StatusOK, user)

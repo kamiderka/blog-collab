@@ -1,17 +1,11 @@
 package main
 
 import (
-	// "net/http"
 	"user-microservice/common"
 	db "user-microservice/databases"
-	// "user-microservice/models"
-
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/contrib/jwt"
-	// "user-microservice/daos"
-	// "user-microservice/utils"
 	"user-microservice/controllers"
-
 )
 
 type Main struct {
@@ -58,7 +52,7 @@ func main() {
 
 			user.GET("detail/:id", c.GetUserByID)
 			// user.GET("/", c.GetUserByParams)
-			// user.DELETE(":id", c.DeleteUserByID)
+			user.DELETE(":id", c.DeleteUserByID)
 
 		}
 
