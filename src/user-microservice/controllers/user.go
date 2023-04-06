@@ -53,9 +53,6 @@ func (u *User) AddUser(ctx *gin.Context) {
 	}
 
 	user := models.User{Name: addUserDTO.Name, Password: addUserDTO.Password}
-
-	ctx.JSON(http.StatusInternalServerError, user)
-
 	err := u.userDAO.Insert(user)
 	if err == nil {
 		ctx.JSON(http.StatusOK, models.Message{"Successfully"})

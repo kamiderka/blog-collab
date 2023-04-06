@@ -45,6 +45,7 @@ func main() {
 	v1 := m.router.Group("/api/v1") 
 	{
 
+		// fix permissions! 
 		user := v1.Group("/user")
 		{
 			user.POST("/auth", c.Authenticate)
@@ -53,11 +54,7 @@ func main() {
 			user.GET("detail/:id", c.GetUserByID)
 			// user.GET("/", c.GetUserByParams)
 			user.DELETE(":id", c.DeleteUserByID)
-
 		}
-
-
-		// PAMIĘTAJ O APLIKACJI, MORDO! 
 
 		user.Use(jwt.Auth(common.Config.JwtSecretPassword))
 		{
