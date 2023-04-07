@@ -59,6 +59,7 @@ const SignUpForm = () => {
     navigate("/admin-panel");
     resetLoginInput("");
     resetpasswordInput("");
+    resetEmailInput("");
   };
 
   const inputStyles =

@@ -6,7 +6,9 @@ import RootLayout from "./pages/RootLayout";
 import SignInForm from "./components/LoginAuth/SignInForm";
 import SignUpForm from "./components/LoginAuth/SignUpForm";
 import AdminPanel from "./pages/AdminPanel";
-
+import Dashboard from "./components/AdminPanel/Dashboard/Dashboard";
+import Upload from "./components/AdminPanel/Upload/Upload";
+import Settings from "./components/AdminPanel/Settings/Settings";
 function App() {
   const router = createBrowserRouter([
     {
@@ -15,13 +17,22 @@ function App() {
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <HomePage /> },
-        {
-          path: "/login",
-          element: <LoginPage />,
-        },
+        { path: "/login", element: <LoginPage /> },
         { path: "/login/signin", element: <SignInForm /> },
         { path: "/login/signup", element: <SignUpForm /> },
-        { path: "/admin-panel", element: <AdminPanel /> },
+      ],
+    },
+    {
+      path: "/admin-panel",
+      element: <AdminPanel />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "dashboard",
+          element: <Dashboard />,
+        },
+        { path: "upload", element: <Upload /> },
+        { path: "settings", element: <Settings /> },
       ],
     },
   ]);

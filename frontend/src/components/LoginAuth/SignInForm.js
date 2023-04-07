@@ -1,4 +1,3 @@
-import { useAuth } from "../../store/auth-context";
 import useInput from "../../hooks/use-input";
 import { Link, useNavigate } from "react-router-dom";
 import { loginValidation, passwordValidation } from "./loginValidation";
@@ -30,17 +29,11 @@ const SignInForm = () => {
 
   const navigate = useNavigate();
 
-  const { loginForm, onChangeForm } = useAuth();
-
   let formIsValid = false;
 
   if (enteredLoginIsValid && enteredPasswordIsValid) {
     formIsValid = true;
   }
-
-  const loginFormHandler = (form) => {
-    onChangeForm(form);
-  };
 
   const submitFormHandler = (event) => {
     event.preventDefault();
@@ -61,10 +54,7 @@ const SignInForm = () => {
   const errorStyles = "text-[15px] mt-[10px] font-medium text-red";
 
   return (
-    <form
-      onSubmit={submitFormHandler}
-      className="custom-width h-auto absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] px-[20px] custom-box-shadow rounded-lg"
-    >
+    <form onSubmit={submitFormHandler} className="">
       <h1 className="mt-[30px] text-[24px] font-bold text-gray_500">
         Hi, Welcome Back
       </h1>
@@ -111,7 +101,7 @@ const SignInForm = () => {
           }`
         }
       ></input>
-      {!loginForm && passwordHasError && passwordIsLeft && (
+      {passwordHasError && passwordIsLeft && (
         <p className={errorStyles}>Incorrect login or password</p>
       )}
       <p className="text-end mt-[10px] text-[15px] font-medium text-blue">

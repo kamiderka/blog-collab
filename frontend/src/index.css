@@ -18,3 +18,7 @@ body {
 .custom-box-shadow {
   box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1), -4px -4px 4px rgba(0, 0, 0, 0.1);
 }
+
+.blur {
+  backdrop-filter: blur(1px);
+}

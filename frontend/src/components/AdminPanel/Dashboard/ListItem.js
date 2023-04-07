@@ -3,14 +3,20 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 const ListItem = (props) => {
   return (
-    <li className="h-[5vh] flex gap-[10px] items-center  ">
+    <li
+      onClick={props.clickedItem}
+      className="h-[5vh] flex gap-[10px] p-[10px] items-center custom-box-shadow rounded-md"
+    >
       <p className="grow text-gray_500 font-medium text-[18px]">
         {props.title}
       </p>
 
-      <InfoOutlinedIcon style={{ color: "#444444" }} />
+      <InfoOutlinedIcon style={{ color: "#444444" }} onClick={props.showInfo} />
       <ModeEditOutlineOutlinedIcon style={{ color: "#444444" }} />
-      <DeleteOutlineOutlinedIcon style={{ color: "#444444" }} />
+      <DeleteOutlineOutlinedIcon
+        style={{ color: "#444444" }}
+        onClick={props.deleteItem}
+      />
     </li>
   );
 };
