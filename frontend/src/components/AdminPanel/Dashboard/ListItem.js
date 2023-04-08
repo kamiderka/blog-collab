@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -12,7 +13,12 @@ const ListItem = (props) => {
       </p>
 
       <InfoOutlinedIcon style={{ color: "#444444" }} onClick={props.showInfo} />
-      <ModeEditOutlineOutlinedIcon style={{ color: "#444444" }} />
+      <Link to="/admin-panel/upload">
+        <ModeEditOutlineOutlinedIcon
+          style={{ color: "#444444" }}
+          onClick={props.editItem}
+        />
+      </Link>
       <DeleteOutlineOutlinedIcon
         style={{ color: "#444444" }}
         onClick={props.deleteItem}

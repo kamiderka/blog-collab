@@ -5,13 +5,8 @@ const ModalInfo = () => {
   const { articlesData, clickedItem } = useArticles();
 
   let index = null;
-  console.log(`clicked item modal ${clickedItem}`);
 
-  articlesData.forEach((item) => {
-    if (item.id === clickedItem) {
-      index = articlesData.indexOf(item);
-    }
-  });
+  index = articlesData.findIndex((item) => item.id === clickedItem);
 
   return (
     <div className="custom-width h-[40vh] p-[20px] absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] flex flex-wrap items-center z-20 bg-white custom-box-shadow rounded-md">

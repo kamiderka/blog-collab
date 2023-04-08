@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useInput = (validateValue, initialValue = "") => {
+const useInput = (validateValue, initialValue) => {
   const [enteredValue, setEnteredValue] = useState(initialValue);
   const [inputIsTouched, setInputIsTouched] = useState(false);
   const [inputIsLeft, setInputIsLeft] = useState(false);

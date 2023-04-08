@@ -5,38 +5,58 @@ import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDown
 
 const Upload = () => {
   const {
+    onUploadArticle,
+    articlesData,
+    clickedItem,
+    editMode,
+    onEditMode,
+    onEditArticle,
+  } = useArticles();
+
+  let index = null;
+
+  if (editMode) {
+    index = articlesData.findIndex((item) => item.id === clickedItem);
+  }
+
+  const defaultValues = {
+    defaultTitle: index !== null ? articlesData[index].title : "",
+    defaultSubtitle: index !== null ? articlesData[index].subtitle : "",
+    defaultAuthor: index !== null ? articlesData[index].author : "",
+    defaultArticle: index !== null ? articlesData[index].article : "",
+  };
+
+  const {
     enteredValue: enteredTitle,
     valueChangeHandler: titleChangeHandler,
     reset: resetTitleInput,
     valueIsValid: titleIsValid,
-  } = useInput(() => true);
+  } = useInput(() => true, defaultValues.defaultTitle);
   const {
     enteredValue: enteredSubtitle,
     valueChangeHandler: subtitleChangeHandler,
     reset: resetSubtitleInput,
     valueIsValid: subtitleIsValid,
-  } = useInput(() => true);
+  } = useInput(() => true, defaultValues.defaultSubtitle);
   const {
     enteredValue: enteredAuthor,
     valueChangeHandler: authorChangeHandler,
     reset: resetAuthorInput,
     valueIsValid: authorIsvalid,
-  } = useInput(() => true);
+  } = useInput(() => true, defaultValues.defaultAuthor);
 
   const {
     enteredValue: enteredArticle,
     valueChangeHandler: articleChangeHandler,
     reset: resetArticle,
     valueIsValid: articleIsvalid,
-  } = useInput(() => true);
+  } = useInput(() => true, defaultValues.defaultArticle);
 
   let today = new Date();
   let day = String(today.getDate()).padStart(2, "0");
   let month = String(today.getMonth() + 1).padStart(2, "0");
   let year = String(today.getFullYear());
   const todaysDate = day + "." + month + "." + year;
-
-  const { onUploadArticle } = useArticles();
 
   let formIsValid =
     titleIsValid && subtitleIsValid && authorIsvalid && articleIsvalid;
@@ -51,11 +71,17 @@ const Upload = () => {
       title: enteredTitle,
       subtitle: enteredSubtitle,
       author: enteredAuthor,
-      content: enteredArticle,
+      article: enteredArticle,
       date: todaysDate,
+      id: Math.floor(Math.random() * 1000),
     };
 
-    onUploadArticle(articleData);
+    if (!editMode) {
+      onUploadArticle(articleData);
+    } else {
+      onEditArticle(articleData);
+      onEditMode(false);
+    }
 
     navigate("/admin-panel/dashboard");
     resetTitleInput("");
@@ -67,7 +93,7 @@ const Upload = () => {
   return (
     <form
       onSubmit={submitFormHandler}
-      className="custom-width h-[80vh] absolute left-[50%] translate-x-[-50%] flex flex-col overflow-y-auto"
+      className="w-[100%] h-[80vh] absolute px-[20px] flex flex-col overflow-y-auto overflow-x-hidden"
     >
       <h2 className="mt-[20px] text-[24px] text-gray_500">Articles Ulpoad</h2>
       <label className="text-[18px] mt-[20px] text-gray_700">Title</label>

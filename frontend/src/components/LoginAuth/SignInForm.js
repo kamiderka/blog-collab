@@ -40,7 +40,7 @@ const SignInForm = () => {
     if (!formIsValid) return;
 
     console.log("zalogowano");
-    navigate("/admin-panel");
+    navigate("/admin-panel/dashboard");
     resetLoginInput("");
     resetPasswordInput("");
   };
@@ -54,7 +54,10 @@ const SignInForm = () => {
   const errorStyles = "text-[15px] mt-[10px] font-medium text-red";
 
   return (
-    <form onSubmit={submitFormHandler} className="">
+    <form
+      onSubmit={submitFormHandler}
+      className="custom-width h-auto absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] px-[20px] custom-box-shadow rounded-lg"
+    >
       <h1 className="mt-[30px] text-[24px] font-bold text-gray_500">
         Hi, Welcome Back
       </h1>

@@ -9,6 +9,8 @@ const ArticlesList = () => {
     showInfoModal,
     onShowInfoModal,
     onDeleteItem,
+    editMode,
+    onEditMode,
   } = useArticles();
 
   const showInfoHandler = () => {
@@ -23,6 +25,10 @@ const ArticlesList = () => {
     onDeleteItem(id);
   };
 
+  const editItemHandler = () => {
+    onEditMode(!editMode);
+  };
+
   return (
     <ul className="custom-width mt-[20px] ml-[20px] p-[10px] flex flex-col gap-[10px] custom-box-shadow rounded-md">
       {articlesData.map((article) => (
@@ -35,6 +41,7 @@ const ArticlesList = () => {
           }}
           clickedItem={() => clickedItemHandler(article.id)}
           deleteItem={() => deleteItemHandler(article.id)}
+          editItem={() => editItemHandler()}
         />
       ))}
     </ul>

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
 
 export const ArticlesContext = React.createContext();
 
@@ -37,6 +37,7 @@ export const ArticlesContextProvider = (props) => {
   const [showInfoModal, setShowModal] = useState(false);
   const [clickedItem, setClickedItem] = useState(null);
   const [articlesData, setArticlesData] = useState(DUMMY_DATA);
+  const [editMode, setEditMode] = useState(false);
 
   const showInfoModalHandler = (value) => {
     setShowModal(value);
@@ -51,17 +52,39 @@ export const ArticlesContextProvider = (props) => {
   };
 
   const uploadArticleHandler = (data) => {
-    setArticlesData(articlesData.push(data));
+    setArticlesData((prev) => [...prev, data]);
+  };
+
+  const EditArticleHandler = (data) => {
+    setArticlesData((prev) => {
+      const updateItem = articlesData.findIndex(
+        (item) => item.id === clickedItem
+      );
+      articlesData[updateItem].title = data.title;
+      articlesData[updateItem].subtitle = data.subtitle;
+      articlesData[updateItem].author = data.author;
+      articlesData[updateItem].content = data.content;
+      articlesData[updateItem].date = data.date;
+      articlesData[updateItem].id = data.id;
+      return [...prev];
+    });
+  };
+
+  const editModeHandler = (value) => {
+    setEditMode(value);
   };
 
   const value = {
     showInfoModal,
     clickedItem,
     articlesData,
+    editMode,
     onShowInfoModal: showInfoModalHandler,
     onClickItem: clickedItemHandler,
     onDeleteItem: deleteItemHandler,
     onUploadArticle: uploadArticleHandler,
+    onEditArticle: EditArticleHandler,
+    onEditMode: editModeHandler,
   };
 
   return (

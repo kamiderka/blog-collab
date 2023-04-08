@@ -56,7 +56,7 @@ const SignUpForm = () => {
     if (!formIsValid) return;
 
     console.log("zalogowano");
-    navigate("/admin-panel");
+    navigate("/admin-panel/dashboard");
     resetLoginInput("");
     resetpasswordInput("");
     resetEmailInput("");

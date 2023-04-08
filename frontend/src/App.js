@@ -17,13 +17,18 @@ function App() {
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <HomePage /> },
-        { path: "/login", element: <LoginPage /> },
-        { path: "/login/signin", element: <SignInForm /> },
-        { path: "/login/signup", element: <SignUpForm /> },
+        {
+          path: "login",
+          element: <LoginPage />,
+          children: [
+            { path: "signin", element: <SignInForm /> },
+            { path: "signup", element: <SignUpForm /> },
+          ],
+        },
       ],
     },
     {
-      path: "/admin-panel",
+      path: "admin-panel",
       element: <AdminPanel />,
       errorElement: <ErrorPage />,
       children: [
@@ -37,7 +42,7 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router}></RouterProvider>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
