@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"user-microservice/common"
-	db "user-microservice/databases"
-	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/contrib/jwt"
 	"user-microservice/controllers"
+	db "user-microservice/databases"
+
+	"github.com/gin-gonic/contrib/jwt"
+	"github.com/gin-gonic/gin"
 )
 
 type Main struct {
@@ -18,18 +20,20 @@ func (m *Main) initServer() error {
 	// Load config file
 	err = common.LoadConfig()
 	if err != nil {
+		fmt.Println(err.Error())
 		return err
 	}
 
 
 	err = db.UserDb.Init()
 	if err != nil {
+		fmt.Println("DB")
 		return err
 	}
 
 
 	m.router = gin.Default()
-
+	fmt.Println("Router")
 	return nil
 }
 
@@ -38,7 +42,8 @@ func main() {
 	m := Main{}
 
 	if m.initServer() != nil {
-		return
+		fmt.Println("EEEEe")
+		return 
 	}
 
 	c := controllers.User{}

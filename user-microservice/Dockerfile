@@ -6,7 +6,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
-RUN CGO_ENABLED=0 go build -o microservice /user-microservice/main.go
+RUN CGO_ENABLED=0 go build -o user-microservice /user-microservice/main.go
 
 FROM alpine:latest
 
@@ -16,4 +16,4 @@ WORKDIR /user-microservice
 
 COPY --from=builder /user-microservice/ /user-microservice/
 
-CMD ./microservice
+CMD ./user-microservice

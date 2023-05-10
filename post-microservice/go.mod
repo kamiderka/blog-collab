@@ -1,4 +1,4 @@
-module user-microservice
+module post-microservice
 
 go 1.19
 

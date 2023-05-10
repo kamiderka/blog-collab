@@ -8,6 +8,14 @@ services:
       - "9090:9090"
     restart: always
 
+  post-microservice:
+    image: post-microservice
+    environment:
+      - MY_VAR=old_value
+    ports:
+      - "8000:8000"
+    restart: always
+
   watchtower:
     image: containrrr/watchtower
     volumes:
@@ -15,8 +23,8 @@ services:
     command: --cleanup
     restart: always
 
-  dockerized-react:
-    image: dockerized-react
+  frontend:
+    image: frontend
     ports:
       - "3000:3000"
     restart: always
